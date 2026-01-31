@@ -23,9 +23,7 @@ class PartnerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'website' => 'nullable|url',
             'order' => 'required|integer',
             'is_active' => 'boolean',
         ]);
@@ -34,9 +32,13 @@ class PartnerController extends Controller
             $validated['logo'] = $request->file('logo')->store('partners', 'public');
         }
 
+        // Auto-generate name from logo filename
+        $validated['name'] = 'Partner ' . time();
+
         Partner::create($validated);
 
-        return redirect()->route('admin.partners.index')->with('success', 'Partner created successfully');
+        return redirect()->route('admin.partners.index')
+                        ->with('success', 'Partner logo uploaded successfully! ✅');
     }
 
     public function edit(Partner $partner)
@@ -47,15 +49,12 @@ class PartnerController extends Controller
     public function update(Request $request, Partner $partner)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'website' => 'nullable|url',
             'order' => 'required|integer',
             'is_active' => 'boolean',
         ]);
 
         if ($request->hasFile('logo')) {
-            // Delete old logo
             if ($partner->logo) {
                 Storage::disk('public')->delete($partner->logo);
             }
@@ -64,17 +63,19 @@ class PartnerController extends Controller
 
         $partner->update($validated);
 
-        return redirect()->route('admin.partners.index')->with('success', 'Partner updated successfully');
+        return redirect()->route('admin.partners.index')
+                        ->with('success', 'Partner logo updated successfully! ✅');
     }
 
     public function destroy(Partner $partner)
     {
-        // Delete logo
         if ($partner->logo) {
             Storage::disk('public')->delete($partner->logo);
         }
-        
+
         $partner->delete();
-        return redirect()->route('admin.partners.index')->with('success', 'Partner deleted successfully');
+
+        return redirect()->route('admin.partners.index')
+                        ->with('success', 'Partner deleted successfully! ✅');
     }
 }

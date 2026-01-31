@@ -10,10 +10,7 @@ class Partner extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'logo',
         'website',
-        'order',
         'is_active',
     ];
 

@@ -6,7 +6,7 @@
 @section('content')
 <div class="mb-6 flex justify-between items-center">
     <p class="text-gray-600">Manage your business solutions</p>
-    <a href="{{ route('admin.solutions.create') }}" 
+    <a href="{{ route('admin.solutions.create') }}"
        class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition inline-flex items-center">
         <i class="fas fa-plus mr-2"></i> Add Solution
     </a>
@@ -15,18 +15,28 @@
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
     <table class="w-full">
         <thead class="bg-gray-50">
-            <tr>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Order</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Features</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-            </tr>
-        </thead>
+    <tr>
+        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Image</th>
+        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
+        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Features</th>
+        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+        <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+    </tr>
+</thead>
         <tbody class="divide-y divide-gray-200">
             @forelse($solutions as $solution)
                 <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 text-sm font-medium">{{ $solution->order }}</td>
+    <td class="px-6 py-4 whitespace-nowrap">
+        @if($solution->image)
+            <img src="{{ asset('storage/' . $solution->image) }}"
+                 alt="{{ $solution->title }}"
+                 class="h-16 w-24 object-cover rounded-lg">
+        @else
+            <div class="h-16 w-24 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
+                <i class="fas fa-image text-gray-400"></i>
+            </div>
+        @endif
+    </td>
                     <td class="px-6 py-4">
                         <div class="text-sm font-medium text-gray-900">{{ $solution->title }}</div>
                         <div class="text-sm text-gray-500">{{ Str::limit($solution->description, 50) }}</div>

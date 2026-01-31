@@ -237,13 +237,18 @@
                             @endif
                         </div>
                         <div class="{{ $index % 2 != 0 ? 'order-1 md:order-2' : '' }} rounded-2xl overflow-hidden shadow-2xl">
-                            @if($solution->image)
-                                <img src="{{ asset('storage/' . $solution->image) }}" alt="{{ $solution->title }}" class="w-full h-96 object-cover">
-                            @else
-                                <div class="h-96 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                                    <i class="{{ $solution->icon }} text-white text-9xl opacity-50"></i>
-                                </div>
-                            @endif
+                           @if($solution->image)
+    <img src="{{ asset('storage/' . $solution->image) }}"
+         alt="{{ $solution->title }}"
+         class="w-full h-96 object-cover rounded-2xl">
+@else
+    <div class="h-96 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center rounded-2xl border-2 border-dashed border-gray-300">
+        <div class="text-center">
+            <i class="fas fa-image text-gray-400 text-6xl mb-4"></i>
+            <p class="text-gray-500 font-medium">No image uploaded</p>
+        </div>
+    </div>
+@endif
                         </div>
                     </div>
                 </div>

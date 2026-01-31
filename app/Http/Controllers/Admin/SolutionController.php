@@ -22,16 +22,16 @@ class SolutionController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'features' => 'nullable|array',
-            'features.*' => 'string',
-            'image' => 'nullable|image|max:2048',
-            'icon' => 'required|string|max:255',
-            'order' => 'required|integer',
-            'is_active' => 'boolean',
-        ]);
+      $validated = $request->validate([
+    'title' => 'required|string|max:255',
+    'description' => 'required|string',
+    'features' => 'nullable|array',
+    'features.*' => 'string',
+    'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Required for new
+    'icon' => 'nullable|string|max:255', // Optional
+    'order' => 'required|integer',
+    'is_active' => 'boolean',
+]);
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('solutions', 'public');
@@ -50,15 +50,15 @@ class SolutionController extends Controller
     public function update(Request $request, Solution $solution)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'features' => 'nullable|array',
-            'features.*' => 'string',
-            'image' => 'nullable|image|max:2048',
-            'icon' => 'required|string|max:255',
-            'order' => 'required|integer',
-            'is_active' => 'boolean',
-        ]);
+    'title' => 'required|string|max:255',
+    'description' => 'required|string',
+    'features' => 'nullable|array',
+    'features.*' => 'string',
+    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Optional for edit
+    'icon' => 'nullable|string|max:255',
+    'order' => 'required|integer',
+    'is_active' => 'boolean',
+]);
 
         if ($request->hasFile('image')) {
             if ($solution->image) {
