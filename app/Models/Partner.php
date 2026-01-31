@@ -10,6 +10,8 @@ class Partner extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
+        'logo',
         'website',
         'is_active',
     ];
@@ -27,10 +29,10 @@ class Partner extends Model
     }
 
     /**
-     * Scope for ordering
+     * Scope for ordering by ID
      */
     public function scopeOrdered($query)
     {
-        return $query->orderBy('order');
+        return $query->orderBy('id'); // ✅ ترتيب حسب ID بدل order
     }
 }

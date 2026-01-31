@@ -24,12 +24,11 @@
 
             <!-- Info -->
             <div class="p-4 border-t border-gray-100">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-semibold text-gray-500">Order: {{ $partner->order }}</span>
+                <div class="flex items-center justify-center mb-3">
                     @if($partner->is_active)
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                     @else
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">Inactive</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">Inactive</span>
                     @endif
                 </div>
 

@@ -38,17 +38,6 @@
             </p>
         </div>
 
-        <!-- Order -->
-        <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Display Order *</label>
-            <input type="number"
-                   name="order"
-                   value="{{ old('order', $partner->order) }}"
-                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
-                   required>
-            <p class="text-xs text-gray-500 mt-1">Lower numbers appear first</p>
-        </div>
-
         <!-- Active Status -->
         <div class="mb-6">
             <label class="flex items-center">

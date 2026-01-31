@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
-            $table->string('logo'); // path to logo image
-
+            $table->string('name')->nullable();      // Auto-generated
+            $table->string('logo');                  // Logo only
+            $table->text('website')->nullable();     // Nullable
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
